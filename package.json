@@ -10,9 +10,9 @@
     "dev:domain": "npm run -w applications/domain dev",
     "dev:core": "npm run -w applications/core dev",
     "dev:ui": "npm run -w applications/ui dev",
-    "prisma:migrate": "npm run -w packages/prisma migrate",
-    "prisma:generate": "npm run -w packages/prisma generate",
-    "prisma:init": "npm run -w packages/prisma init"
+    "prisma:migrate": "npm run -w applications/core  prisma:migrate",
+    "prisma:generate": "npm run -w applications/core prisma:generate",
+    "prisma:init": "npm run -w applications/core  prisma:init"
   },
   "workspaces": {
     "packages": [

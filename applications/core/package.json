@@ -8,7 +8,10 @@
     "build": "tsc --incremental",
     "build:clean": "tsc --build --clean",
     "build:prod": "npm run build:clean && tsc",
-    "test": "jest"
+    "test": "jest",
+    "prisma:init": "npx prisma init",
+    "prisma:generate": "npx prisma generate",
+    "prisma:migrate": "npx prisma migrate dev"
   },
   "author": "Samuel Bines",
   "license": "ISC",
@@ -18,7 +21,9 @@
     "express-session": "^1.18.1",
     "nodemon": "^3.1.9",
     "typescript": "^5.7.2",
-    "@app/domain": "1.0.0"
+    "@prisma/client": "^6.1.0",
+    "prisma": "^6.1.0",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "@jest-mock/express": "^2.1.0",
