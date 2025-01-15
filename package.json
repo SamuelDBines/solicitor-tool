@@ -1,0 +1,30 @@
+{
+  "name": "codemonorepo",
+  "version": "1.0.0",
+  "description": "All code I write from now on should go in here",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npm run build && concurrently npm:dev:*",
+    "test": "npm run build && npm run test -w applications/core",
+    "build": "npm run -w packages build && npm run build -w applications/core",
+    "dev:domain": "npm run -w applications/domain dev",
+    "dev:core": "npm run -w applications/core dev",
+    "dev:ui": "npm run -w applications/ui dev",
+    "prisma:migrate": "npm run -w packages/prisma migrate",
+    "prisma:generate": "npm run -w packages/prisma generate",
+    "prisma:init": "npm run -w packages/prisma init"
+  },
+  "workspaces": {
+    "packages": [
+      "applications/*",
+      "packages/*"
+    ]
+  },
+  "author": "Samuel Bines",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "eslint": "^9.17.0",
+    "eslint-plugin-unused-imports": "^4.1.4"
+  }
+}

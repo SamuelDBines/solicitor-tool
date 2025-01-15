@@ -1,0 +1,27 @@
+{
+  "name": "@packages/prisma",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "scripts": {
+    "build": "tsc --incremental",
+    "watch": "tsc -W --preserveWatchOutput --incremental",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prisma:init": "npx prisma init",
+    "prisma:generate": "npx prisma generate",
+    "prisma:migrate": "npx prisma migrate dev"
+  },
+  "author": "Samuel Bines",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "@prisma/client": "^6.1.0",
+    "prisma": "^6.1.0",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "typescript": "^5.7.2"
+  }
+}

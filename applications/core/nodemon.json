@@ -1,0 +1,15 @@
+{
+  "watch": [
+    "./",
+    "../../packages"
+  ],
+  "ext": "ts,json",
+  "ignore": [
+    "dist/**/*",
+    "src/**/*.test.ts",
+    "node_modules/**/*",
+    "packages/**/dist/**/*",
+    "packages/**/node_modules/**/*"
+  ],
+  "exec": "npm start"
+}
