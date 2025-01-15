@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import dbClient from '@packages/database';
+import prismaClient from '@app/domain';
 const router = Router();
 
 router.get('/', async (req, res) => {
-  const users = await dbClient.findUsers();
+  const users = await prismaClient.users.findMany();
   res.status(200).send(users);
 });
 
