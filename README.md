@@ -1,3 +1,9 @@
+## Get Started
+```
+npm run dev
+```
+
+
 applications 
   core - README.md (api)
   domain - prisma(db)
