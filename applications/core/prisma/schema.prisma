@@ -31,7 +31,6 @@ model Member {
 
 model PersonGroup {
   id    Int     @id @default(autoincrement())
-  email String  @unique
   name  String?
   password String?
   members Member[]

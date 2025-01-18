@@ -9,10 +9,24 @@ export const auth = (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token.split(' ')[1], settings.JWT_SECRET); // Remove 'Bearer' prefix
-    req.user = decoded; // Attach user info to the request object
+    req.user = verifyToken(token);
     next();
   } catch (err) {
     return res.status(403).json({ message: "Invalid or expired token" });
   }
 };
+
+
+export function verifyToken(token: string) {
+  const decoded = jwt.verify(token.split(' ')[1], settings.JWT_SECRET);
+  return decoded;
+}
+
+
+export function signToken(payload: object,
+  options: {
+    expiresIn: string;
+  } = { expiresIn: '1h' }): string {
+  const token = jwt.sign(payload, settings.JWT_SECRET, options);
+  return token;
+}

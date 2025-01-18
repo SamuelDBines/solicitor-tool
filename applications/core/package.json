@@ -18,6 +18,7 @@
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^6.1.0",
+    "bcrypt": "^5.1.1",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "express-session": "^1.18.1",
@@ -29,6 +30,7 @@
   },
   "devDependencies": {
     "@jest-mock/express": "^2.1.0",
+    "@types/bcrypt": "^5.0.2",
     "@types/express": "^5.0.0",
     "@types/express-session": "^1.18.1",
     "@types/jest": "^29.5.14",
