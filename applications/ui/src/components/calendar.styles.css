@@ -1,0 +1,60 @@
+/* Main calendar container */
+.rbc-calendar {
+  @apply bg-white border rounded-lg shadow-md;
+}
+
+/* Toolbar (navigation and views like month, week, day) */
+.rbc-toolbar {
+  @apply flex justify-between items-center p-4 border-b;
+}
+
+.rbc-toolbar button {
+  @apply bg-purple-500 text-white font-medium py-1 px-4 rounded-md hover:bg-purple-600 transition duration-200;
+}
+
+.rbc-toolbar button:disabled {
+  @apply bg-gray-300 text-gray-600 cursor-not-allowed;
+}
+
+/* Toolbar labels (e.g., month name) */
+.rbc-toolbar-label {
+  @apply text-xl font-bold text-gray-800;
+}
+
+/* Event container */
+.rbc-event {
+  @apply bg-purple-500 text-white rounded-md p-1 font-medium hover:bg-purple-600 transition duration-200;
+}
+
+/* Day headers (e.g., Mon, Tue) */
+.rbc-header {
+  @apply bg-gray-100 text-gray-700 font-bold p-2 border-b;
+}
+
+/* Time slots (grid lines) */
+.rbc-time-slot {
+  @apply border-t border-gray-200;
+}
+
+/* Today highlight */
+.rbc-today {
+  @apply bg-purple-50;
+}
+
+/* Month view cells */
+.rbc-month-row {
+  @apply border-b;
+}
+
+.rbc-day-bg {
+  @apply hover:bg-gray-50;
+}
+
+.rbc-off-range-bg {
+  @apply bg-gray-100 text-gray-400; /* For days outside the current month */
+}
+
+/* Selected event highlight */
+.rbc-selected {
+  @apply bg-purple-700 text-white;
+}
