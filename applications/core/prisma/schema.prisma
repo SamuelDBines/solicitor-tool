@@ -27,6 +27,8 @@ model Member {
   userId Int  
   personGroup PersonGroup @relation(fields: [personGroupId], references: [id])
   personGroupId Int
+  tasks Task[]
+  events Event[]
 }
 
 model PersonGroup {
@@ -34,6 +36,8 @@ model PersonGroup {
   name  String?
   password String?
   members Member[]
+  tasks Task[]
+
 }
 
 model Task {
@@ -41,6 +45,23 @@ model Task {
   name String
   description String
   type String
+  member Member[] 
+  personGroupId Int
+  personGroup PersonGroup @relation(fields: [personGroupId], references: [id])
+  events Event[]
+}
+
+model Event {
+  id Int @id @default(autoincrement())
+  name String
+  description String
+  startTime DateTime
+  endTime DateTime
+  createdAt DateTime
+  updatedAt DateTime
+  members Member[]
+  taskId Int
+  task Task @relation(fields: [taskId], references: [id])
 }
 
 model Property {
