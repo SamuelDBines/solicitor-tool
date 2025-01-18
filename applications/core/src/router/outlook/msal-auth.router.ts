@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import msalClient from '../../utils/microsoftClient';
+import msalClient from './msal.client';
 
 const authRouter = Router();
 
@@ -22,7 +22,7 @@ authRouter.get('/outlook/callback', async (req, res) => {
       redirectUri: process.env.MS_REDIRECT_URI,
     });
 
-    // Save tokens to the user's session or database
+    // @ts-ignore
     req.session.tokens = tokenResponse.accessToken;
 
     res.status(200).send('Outlook Calendar connected successfully');

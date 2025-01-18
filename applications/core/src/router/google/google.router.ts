@@ -13,11 +13,12 @@ authRouter.get('/google', (req, res) => {
 
 authRouter.get('/google/callback', async (req, res) => {
   const code = req.query.code as string;
+
   try {
     const { tokens } = await oAuth2Client.getToken(code);
     oAuth2Client.setCredentials(tokens);
 
-    // Save tokens to the user's session or database
+    // @ts-ignore
     req.session.tokens = tokens;
 
     res.status(200).send('Google Calendar connected successfully');

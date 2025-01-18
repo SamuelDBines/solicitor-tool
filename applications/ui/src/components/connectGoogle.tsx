@@ -2,7 +2,7 @@ import React from 'react';
 
 const ConnectGoogle = () => {
   const handleConnect = async () => {
-    const response = await fetch('/auth/google');
+    const response = await fetch('http://localhost:5000/auth/google');
     const { url } = await response.json();
     window.location.href = url;
   };

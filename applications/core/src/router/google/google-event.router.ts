@@ -6,7 +6,7 @@ const eventRouter = Router();
 eventRouter.post('/google/create', async (req, res) => {
   const { summary, description, start, end } = req.body;
 
-  // Get the user's Google OAuth tokens (from session or DB)
+  // @ts-ignore
   const tokens = req.session.tokens;
 
   if (!tokens) {
@@ -35,6 +35,7 @@ eventRouter.post('/google/create', async (req, res) => {
 });
 
 eventRouter.get('/google/events', async (req, res) => {
+  // @ts-ignore
   const tokens = req.session.tokens;
 
   if (!tokens) {

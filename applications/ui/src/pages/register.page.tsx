@@ -1,6 +1,24 @@
 import React from 'react';
-
+import { registerUser } from '../services/user.service';
+import { useNavigate } from 'react-router-dom';
 const Register = () => {
+  const navigate = useNavigate();
+  const [data, setData] = React.useState({
+    fullName: '',
+    email: '',
+    password: ''
+  });
+
+  const handleChange = (e) => {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value
+    });
+  };
+  const handleRegister = (e) => {
+    e.preventDefault();
+    registerUser(data).then(() => navigate('/login')).catch(err => alert('Error', err));
+  };
   return (
     <div className="bg-white min-h-screen flex items-center justify-center">
       <div className="w-full max-w-md bg-white shadow-md rounded-lg p-6">
@@ -15,9 +33,10 @@ const Register = () => {
               Name
             </label>
             <input
+              onChange={handleChange}
               type="text"
               id="name"
-              name="name"
+              name="fullName"
               placeholder="Enter your name"
               className="mt-1 w-full px-4 py-2 border rounded-lg text-gray-700 focus:ring-purple-500 focus:border-purple-500"
             />
@@ -32,6 +51,7 @@ const Register = () => {
               Email
             </label>
             <input
+              onChange={handleChange}
               type="email"
               id="email"
               name="email"
@@ -49,6 +69,7 @@ const Register = () => {
               Password
             </label>
             <input
+              onChange={handleChange}
               type="password"
               id="password"
               name="password"
@@ -66,6 +87,7 @@ const Register = () => {
               Confirm Password
             </label>
             <input
+              onChange={handleChange}
               type="password"
               id="confirmPassword"
               name="confirmPassword"
@@ -77,6 +99,7 @@ const Register = () => {
           {/* Register Button */}
           <div className="mb-4">
             <button
+              onClick={handleRegister}
               type="submit"
               className="w-full bg-purple-500 hover:bg-purple-600 text-white font-semibold py-2 px-4 rounded-lg"
             >

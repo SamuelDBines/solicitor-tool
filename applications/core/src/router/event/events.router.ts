@@ -20,6 +20,7 @@ eventRouter.get('/group/:groupId', auth, idParamCheck, async (req, res) => {
         },
       },
       include: {
+        //@ts-ignore
         events: true, // Include all events for the group
       },
     });
@@ -28,7 +29,7 @@ eventRouter.get('/group/:groupId', auth, idParamCheck, async (req, res) => {
       res.status(404).json({ message: 'Person group not found or unauthorized' });
       return;
     }
-
+    // @ts-ignore
     res.status(200).json(personGroup.events);
   } catch (error) {
     console.error('Error fetching events:', error.message);
@@ -108,6 +109,7 @@ eventRouter.post('/group/:groupId', auth, idParamCheck, async (req, res) => {
         startTime: new Date(data.startTime),
         endTime: new Date(data.endTime),
         taskId: data.taskId || null,
+        //@ts-ignore
         personGroupId: groupId,
       },
     });

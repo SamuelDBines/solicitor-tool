@@ -12,6 +12,7 @@ const getClient = (accessToken: string) => {
 };
 
 eventRouter.get('/outlook/events', async (req, res) => {
+  // @ts-ignore
   const accessToken = req.session.tokens;
 
   if (!accessToken) {
@@ -32,6 +33,7 @@ eventRouter.get('/outlook/events', async (req, res) => {
 
 eventRouter.post('/outlook/create', async (req, res) => {
   const { subject, start, end, body } = req.body;
+  // @ts-ignore
   const accessToken = req.session.tokens;
 
   if (!accessToken) {
@@ -58,6 +60,7 @@ eventRouter.post('/outlook/create', async (req, res) => {
 
 eventRouter.delete('/outlook/:eventId', async (req, res) => {
   const { eventId } = req.params;
+  // @ts-ignore
   const accessToken = req.session.tokens;
 
   if (!accessToken) {

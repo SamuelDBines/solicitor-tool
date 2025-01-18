@@ -10,6 +10,8 @@ import Calendar from './components/calendar';
 import TasksPage from './pages/tasks.page';
 import TeamsPage from './pages/teams.page';
 import Profile from './pages/profile.page';
+import GoogleConnect from './components/connectGoogle';
+import OutlookConnect from './components/connectOutlook';
 
 const About = () => <h1>About Us</h1>;
 const Dashboard = () => <h1>Dashboard</h1>;
@@ -31,6 +33,8 @@ const App = () => {
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/tasks" element={<TasksPage />} />
         <Route path="/teams" element={<TeamsPage />} />
+        <Route path="/google" element={<GoogleConnect />} />
+        <Route path="/outlook" element={<OutlookConnect />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/register" element={<Register />} />
