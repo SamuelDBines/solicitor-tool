@@ -3,6 +3,11 @@ import userRouter from './router/user/user.router';
 import personGroupRouter from './router/personGroup/personGroup.router';
 import taskRouter from './router/task/task.router';
 import eventRouter from './router/event/events.router';
+import googleAuthRouter from './router/google/google.router';
+import googleEventRouter from './router/google/google-event.router';
+
+
+
 import * as settings from './utils/settings';
 
 const app = express();
@@ -19,6 +24,8 @@ app.use('/api/users', userRouter);
 app.use('/api/groups', personGroupRouter);
 app.use('/api/users', taskRouter);
 app.use('/api/groups', eventRouter);
+app.use('/auth', googleAuthRouter);
+app.use('/events', googleEventRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello World');
