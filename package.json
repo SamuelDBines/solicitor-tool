@@ -10,6 +10,7 @@
     "dev:domain": "npm run -w applications/domain dev",
     "dev:core": "npm run -w applications/core dev",
     "dev:ui": "npm run -w applications/ui dev",
+    "test:core": "npm run -w applications/core test",
     "prisma:migrate": "npm run -w applications/core  prisma:migrate",
     "prisma:generate": "npm run -w applications/core prisma:generate",
     "prisma:init": "npm run -w applications/core  prisma:init"

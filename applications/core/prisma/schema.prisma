@@ -13,27 +13,35 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
-// model Interactions {
-//   id   Int     @id @default(autoincrement())
-//   name  String  @unique
-//   users InteractionRole[]
-// }
-
-// model InteractionRole {
-//   id   Int     @id @default(autoincrement())
-//   name  String  @unique
-//   role  String  
-//   user User? @relation(fields: [userId], references: [id])
-//   userId Int
-// }
-
 model User {
   id    Int     @id @default(autoincrement())
   email String  @unique
   name  String?
   password String?
-  // tenant InteractionRole? @relation(fields: [interactionRoleId], references: [id])
+  PersonGroupToUser Member[]
+}
+
+model Member {
+  id    Int     @id @default(autoincrement())
+  user  User  @relation(fields: [userId], references: [id])
+  userId Int  
+  personGroup PersonGroup @relation(fields: [personGroupId], references: [id])
+  personGroupId Int
+}
+
+model PersonGroup {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
+  password String?
+  members Member[]
+}
+
+model Task {
+  id Int @id @default(autoincrement())
+  name String
+  description String
+  type String
 }
 
 model Property {
@@ -43,6 +51,8 @@ model Property {
   postalCode String?
   // tenant InteractionRole? @relation(fields: [interactionRoleId], references: [id])
 }
+
+
 
 // model Process {
 //   id Int @id @default(autoincrement())

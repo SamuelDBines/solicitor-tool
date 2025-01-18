@@ -1,11 +1,8 @@
 import express from 'express';
-import dotenv from 'dotenv';
-import userRouter from './router/user.router';
+import userRouter from './router/user/user.router';
+import * as settings from './utils/settings';
 
 const app = express();
-dotenv.config();
-
-export const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 

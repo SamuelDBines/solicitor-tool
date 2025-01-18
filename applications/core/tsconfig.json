@@ -4,6 +4,7 @@
     "sourceMap": false,
     "declaration": false,
     "incremental": false,
+    "resolveJsonModule": true,
     "rootDir": "./",
     "outDir": "./dist",
     "baseUrl": "./src"
