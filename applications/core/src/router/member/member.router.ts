@@ -3,7 +3,6 @@ import prismaClient from '../../utils/prisma';
 import * as S from '../../utils/settings';
 import { auth, signToken, verifyToken } from '../../utils/auth';
 import { hashPassword, verifyPassword } from '../../utils/bcrypt';
-import { idParamCheck } from '../../utils/helpers';
 import prisma from '../../utils/prisma';
 const router = Router();
 
@@ -14,14 +13,9 @@ router.get('/', auth, async (req, res) => {
   res.status(200).send(users);
 });
 
-router.get('/:id', auth, idParamCheck, async (req, res) => {
-  const id = req?.params?.id ? parseInt(req.params.id, 10) : undefined;
-  const user = await prismaClient.user.findFirst({
-    where: {
-      id
-    }
-  });
-  res.status(200).send(user);
+router.get('/:id', auth, async (req, res) => {
+  const users = await prismaClient.user.findMany();
+  res.status(200).send(users);
 });
 
 router.post('/register', async (req, res) => {
@@ -47,25 +41,16 @@ router.post('/register', async (req, res) => {
   }
 
   const hashedPassword = await hashPassword(data.password);
-  try {
-    await prisma.$transaction(async (tx) => {
-      return await tx.user.create({
-        data: {
-          email: data.email,
-          name: data.fullName,
-          password: hashedPassword,
-        },
-      });
-    });
-    res.status(201).send({
-      message: 'Registered successfully',
-    });
-  } catch (error) {
-    console.error('Transaction failed:', error.message);
-    res.status(500).send({
-      message: 'Registration failed. Please try again later.',
-    });
-  }
+  await prismaClient.user.create({
+    data: {
+      email: data.email,
+      name: data.fullName,
+      password: hashedPassword,
+    },
+  });
+  res.status(201).send({
+    message: 'Registered successfully',
+  });
 });
 
 router.post('/login', async (req, res) => {

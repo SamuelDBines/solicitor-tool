@@ -1,5 +1,6 @@
 import express from 'express';
 import userRouter from './router/user/user.router';
+import personGroupRouter from './router/personGroup/personGroup.router';
 import * as settings from './utils/settings';
 
 const app = express();
@@ -13,6 +14,7 @@ app.use('/', (req, res, next) => {
 });
 
 app.use('/api/users', userRouter);
+app.use('/api/groups', personGroupRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello World');
