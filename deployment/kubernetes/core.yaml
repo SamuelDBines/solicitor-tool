@@ -2,10 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: core-deployment
-  labels:
-    app: core
+  namespace: default
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: core
@@ -23,8 +22,48 @@ spec:
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
-                  name: database-secret
-                  key: url
+                  name: core-env-secrets
+                  key: DATABASE_URL
+            - name: GOOGLE_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: core-env-secrets
+                  key: GOOGLE_CLIENT_ID
+            - name: GOOGLE_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: core-env-secrets
+                  key: GOOGLE_CLIENT_SECRET
+            - name: GOOGLE_REDIRECT_URI
+              valueFrom:
+                secretKeyRef:
+                  name: core-env-secrets
+                  key: GOOGLE_REDIRECT_URI
+            - name: MS_REDIRECT_URI
+              valueFrom:
+                secretKeyRef:
+                  name: core-env-secrets
+                  key: MS_REDIRECT_URI
+            - name: MS_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: core-env-secrets
+                  key: MS_CLIENT_ID
+            - name: MS_TENANT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: core-env-secrets
+                  key: MS_TENANT_ID
+            - name: MS_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: core-env-secrets
+                  key: MS_CLIENT_SECRET
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "1"
+
 ---
 apiVersion: v1
 kind: Service
