@@ -14,18 +14,20 @@ jobs:
   #   runs-on: ubuntu-latest
   build-and-push:
     runs-on: ubuntu-latest
-    # if: |
-    #   (github.event_name == 'push' && contains(github.event.head_commit.message, 'release')) ||
-    #   (github.event_name == 'pull_request' && contains(github.event.pull_request.title, 'release'))
+    if: |
+      (github.event_name == 'push' && contains(github.event.head_commit.message, 'release')) ||
+      (github.event_name == 'pull_request' && contains(github.event.pull_request.title, 'release'))
     steps:
       # Step 1: Checkout the code
       - name: Checkout Code
         uses: actions/checkout@v3
 
       - name: Start PostgreSQL Database
+        if: contains(github.event.head_commit.message, 'release(core)') || contains(github.event.head_commit.message, 'release')
         run: |
           docker run --name test-postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=test -p 5432:5432 -d postgres:15
       - name: Wait for Database
+        if: contains(github.event.head_commit.message, 'release(core)') || contains(github.event.head_commit.message, 'release')
         run: |
           until docker exec test-postgres pg_isready -U testuser -d testdb -h localhost; do
             echo "Waiting for database...";
@@ -54,21 +56,26 @@ jobs:
 
       # Step 3: Build and Push UI Image
       - name: Build UI Docker Image
+        if: contains(github.event.head_commit.message, 'release(ui)') || contains(github.event.head_commit.message, 'release')
         run: |
           docker build -t registry.digitalocean.com/firebrick/ui:${{ github.sha }} -f Dockerfile .
 
       - name: Tag Docker Image
+        if: contains(github.event.head_commit.message, 'release(ui)') || contains(github.event.head_commit.message, 'release')
         run: |
            docker tag registry.digitalocean.com/firebrick/ui:${{ github.sha }} registry.digitalocean.com/firebrick/ui:latest
 
       - name: Push UI Docker Image with Latest Tag
+        if: contains(github.event.head_commit.message, 'release(ui)') || contains(github.event.head_commit.message, 'release')
         run: |
           docker push registry.digitalocean.com/firebrick/ui:${{ github.sha }}
           docker push registry.digitalocean.com/firebrick/ui:latest
 
       - name: Deploy to Kubernetes
+        if: contains(github.event.head_commit.message, 'release(ui)') || contains(github.event.head_commit.message, 'release')
         run: |
           kubectl set image deployment/ui-deployment ui=registry.digitalocean.com/firebrick/ui:latest
+          kubectl annotate deployment/core-deployment kubernetes.io/change-cause="Commit: $COMMIT_MESSAGE"
           kubectl rollout status deployment/ui-deployment
           
 
@@ -83,19 +90,24 @@ jobs:
       #   run: npm test
 
       - name: Build Core Docker Image
+        if: contains(github.event.head_commit.message, 'release(core)') || contains(github.event.head_commit.message, 'release')
         run: |
           docker build -t registry.digitalocean.com/firebrick/core:${{ github.sha }} -f Dockerfile .
 
       - name: Tag Core Docker Image
+        if: contains(github.event.head_commit.message, 'release(core)') || contains(github.event.head_commit.message, 'release')
         run: |
            docker tag registry.digitalocean.com/firebrick/core:${{ github.sha }} registry.digitalocean.com/firebrick/core:latest
            
       - name: Push Core Docker Image with Latest Tag
+        if: contains(github.event.head_commit.message, 'release(core)') || contains(github.event.head_commit.message, 'release')
         run: |
           docker push registry.digitalocean.com/firebrick/core:${{ github.sha }}
           docker push registry.digitalocean.com/firebrick/core:latest
 
       - name: Deploy to Kubernetes
+        if: contains(github.event.head_commit.message, 'release(core)') || contains(github.event.head_commit.message, 'release')
         run: |
           kubectl set image deployment/core-deployment ui=registry.digitalocean.com/firebrick/core:latest
+          kubectl annotate deployment/core-deployment kubernetes.io/change-cause="Commit: $COMMIT_MESSAGE"
           kubectl rollout status deployment/core-deployment
