@@ -72,11 +72,11 @@ spec:
                   key: MS_CLIENT_SECRET
           resources:
             requests:
-              memory: "512Mi"
-              cpu: "500m"
-            limits:
               memory: "1Gi"
-              cpu: "1"
+              cpu: "2"
+            limits:
+              memory: "2Gi"
+              cpu: "4"
 
 ---
 apiVersion: v1
