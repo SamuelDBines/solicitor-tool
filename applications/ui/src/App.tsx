@@ -5,7 +5,7 @@ import NavbarTwo from './components/navigation2';
 import Login from './pages/login.page';
 import Register from './pages/register.page';
 import Home from './pages/home.page';
-import Calendar from './components/calendar';
+import Calendar from './pages/calendar';
 import TasksPage from './pages/tasks.page';
 import TeamsPage from './pages/teams.page';
 import Profile from './pages/profile.page';

@@ -1,12 +1,11 @@
 import { Router } from 'express';
 import prisma from '../../utils/prisma'; // Prisma client
 import { auth } from '../../utils/auth'; // Authentication middleware
-import { idParamCheck } from '../../utils/helpers'; // Helper for ID validation
 
 const eventRouter = Router();
 
 // Get all events for a specific person group (auth required)
-eventRouter.get('/group/:groupId', auth, idParamCheck, async (req, res) => {
+eventRouter.get('/group/:groupId', auth, async (req, res) => {
   const groupId = parseInt(req.params.groupId, 10);
 
   try {
@@ -19,10 +18,16 @@ eventRouter.get('/group/:groupId', auth, idParamCheck, async (req, res) => {
           },
         },
       },
-      include: {
-        //@ts-ignore
-        events: true, // Include all events for the group
-      },
+    });
+
+    const events = await prisma.event.findMany({
+      // where: {
+      //   members: {
+      //     some: {
+      //       personGroupId: groupId
+      //     }
+      //   }
+      // }
     });
 
     if (!personGroup) {
@@ -30,7 +35,7 @@ eventRouter.get('/group/:groupId', auth, idParamCheck, async (req, res) => {
       return;
     }
     // @ts-ignore
-    res.status(200).json(personGroup.events);
+    res.status(200).json(events);
   } catch (error) {
     console.error('Error fetching events:', error.message);
     res.status(500).json({ message: 'Failed to fetch events' });
@@ -38,7 +43,7 @@ eventRouter.get('/group/:groupId', auth, idParamCheck, async (req, res) => {
 });
 
 // Get a specific event by ID (auth required)
-eventRouter.get('/:eventId', auth, idParamCheck, async (req, res) => {
+eventRouter.get('/:eventId', auth, async (req, res) => {
   const eventId = parseInt(req.params.eventId, 10);
 
   try {
@@ -70,15 +75,17 @@ eventRouter.get('/:eventId', auth, idParamCheck, async (req, res) => {
 });
 
 // Create a new event for a specific person group (auth required)
-eventRouter.post('/group/:groupId', auth, idParamCheck, async (req, res) => {
+eventRouter.post('/group/:groupId', auth, async (req, res) => {
   const groupId = parseInt(req.params.groupId, 10);
   const data: {
     name: string;
     description?: string;
     startTime: Date;
     endTime: Date;
-    taskId?: number;
+    taskId: string;
   } = req.body;
+
+  const taskId: number = parseInt(data.taskId, 10);
 
   if (!data.name || !data.startTime || !data.endTime) {
     res.status(400).json({ message: 'Event name, start time, and end time are required' });
@@ -108,9 +115,9 @@ eventRouter.post('/group/:groupId', auth, idParamCheck, async (req, res) => {
         description: data.description || null,
         startTime: new Date(data.startTime),
         endTime: new Date(data.endTime),
-        taskId: data.taskId || null,
-        //@ts-ignore
-        personGroupId: groupId,
+        taskId,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
     });
 
@@ -122,7 +129,7 @@ eventRouter.post('/group/:groupId', auth, idParamCheck, async (req, res) => {
 });
 
 // Update an event by ID (auth required)
-eventRouter.put('/:eventId', auth, idParamCheck, async (req, res) => {
+eventRouter.put('/:eventId', auth, async (req, res) => {
   const eventId = parseInt(req.params.eventId, 10);
   const data: {
     name?: string;
@@ -162,7 +169,7 @@ eventRouter.put('/:eventId', auth, idParamCheck, async (req, res) => {
 });
 
 // Delete an event by ID (auth required)
-eventRouter.delete('/:eventId', auth, idParamCheck, async (req, res) => {
+eventRouter.delete('/:eventId', auth, async (req, res) => {
   const eventId = parseInt(req.params.eventId, 10);
 
   try {

@@ -18,8 +18,6 @@ const TeamsPage: React.FC = () => {
     localStorage.setItem('team', teamId.toString());
   };
 
-
-
   const handleAddTeam = async () => {
     if (newTeamName.trim() === '') return;
     try {
