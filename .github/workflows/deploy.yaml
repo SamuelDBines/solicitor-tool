@@ -60,11 +60,6 @@ jobs:
         run: |
           docker build -t registry.digitalocean.com/firebrick/ui:latest -f Dockerfile .
 
-      - name: Tag Docker Image
-        if: contains(github.event.head_commit.message, 'release(ui)') || contains(github.event.head_commit.message, 'release(all)')
-        run: |
-           docker tag registry.digitalocean.com/firebrick/ui:latest
-
       - name: Push UI Docker Image with Latest Tag
         if: contains(github.event.head_commit.message, 'release(ui)') || contains(github.event.head_commit.message, 'release(all)')
         run: |
@@ -99,11 +94,6 @@ jobs:
         run: |
           docker build -t registry.digitalocean.com/firebrick/core:latest -f Dockerfile .
 
-      - name: Tag Core Docker Image
-        if: contains(github.event.head_commit.message, 'release(core)') || contains(github.event.head_commit.message, 'release(all)')
-        run: |
-           docker tag registry.digitalocean.com/firebrick/core:latest
-           
       - name: Push Core Docker Image with Latest Tag
         if: contains(github.event.head_commit.message, 'release(core)') || contains(github.event.head_commit.message, 'release(all)')
         run: |
