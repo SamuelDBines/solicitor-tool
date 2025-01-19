@@ -28,9 +28,8 @@ jobs:
 
       # Step 3: Build and Push UI Image
       - name: Build UI Docker Image
-        working-directory: applications/ui
         run: |
-          docker build -t registry.digitalocean.com/firebrick/ui:${{ github.sha }} .
+          docker build -f Dockerfile.ui  -t registry.digitalocean.com/firebrick/ui:${{ github.sha }} .
       - name: Push UI Docker Image
         run: |
           docker push registry.digitalocean.com/firebrick/ui:${{ github.sha }}
@@ -42,15 +41,12 @@ jobs:
           node-version: '18'
 
       - name: Install Core Dependencies
-        working-directory: applications/core
         run: npm ci
 
       - name: Run Core Tests
-        working-directory: applications/core
         run: npm test
 
       - name: Build Core Docker Image
-        working-directory: applications/core
         run: |
           docker build -t registry.digitalocean.com/firebrick/core:${{ github.sha }} .
       - name: Push Core Docker Image
