@@ -1,0 +1,11 @@
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+  name: example-runner-deployment
+  namespace: actions-runner-system
+spec:
+  replicas: 2 # Number of runner pods
+  template:
+    spec:
+      repository: SamuelDBines/solicitor-tool 
+      image: ghcr.io/actions/runner:latest
