@@ -26,6 +26,14 @@ jobs:
       - name: Log in to DOCR
         run: doctl registry login
 
+      - name: Install Node.js for Core
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Core Dependencies
+        run: npm ci
+
       # Step 3: Build and Push UI Image
       - name: Build UI Docker Image
         run: |
@@ -35,13 +43,6 @@ jobs:
           docker push registry.digitalocean.com/firebrick/ui:${{ github.sha }}
 
       # Step 4: Build, Test, and Push Core Image
-      - name: Install Node.js for Core
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      - name: Install Core Dependencies
-        run: npm ci
 
       - name: Run Core Tests
         run: npm test
