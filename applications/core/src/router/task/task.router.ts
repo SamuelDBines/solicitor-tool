@@ -6,8 +6,8 @@ import { idParamCheck } from '../../utils/helpers'; // Helper for ID validation
 const taskRouter = Router();
 
 // Get all tasks for a specific person group (auth required)
-taskRouter.get('/group/:groupId', auth, idParamCheck, async (req, res) => {
-  const groupId = parseInt(req.params.groupId, 10);
+taskRouter.get('/group/:id', auth, async (req, res) => {
+  const groupId = parseInt(req.params.id, 10);
 
   try {
     const personGroup = await prisma.personGroup.findFirst({
@@ -37,8 +37,8 @@ taskRouter.get('/group/:groupId', auth, idParamCheck, async (req, res) => {
 });
 
 // Get a specific task by ID (auth required)
-taskRouter.get('/:taskId', auth, idParamCheck, async (req, res) => {
-  const taskId = parseInt(req.params.taskId, 10);
+taskRouter.get('/:id', auth, async (req, res) => {
+  const taskId = parseInt(req.params.id, 10);
 
   try {
     const task = await prisma.task.findFirst({
@@ -71,8 +71,8 @@ taskRouter.get('/:taskId', auth, idParamCheck, async (req, res) => {
 });
 
 // Create a new task for a specific person group (auth required)
-taskRouter.post('/group/:groupId', auth, idParamCheck, async (req, res) => {
-  const groupId = parseInt(req.params.groupId, 10);
+taskRouter.post('/group/:id', auth, async (req, res) => {
+  const groupId = parseInt(req.params.id, 10);
   const data: { name: string; description?: string; type: string; } = req.body;
 
   if (!data.name || !data.type) {
@@ -114,7 +114,7 @@ taskRouter.post('/group/:groupId', auth, idParamCheck, async (req, res) => {
 });
 
 // Update a task by ID (auth required)
-taskRouter.put('/:taskId', auth, idParamCheck, async (req, res) => {
+taskRouter.put('/:taskId', auth, async (req, res) => {
   const taskId = parseInt(req.params.taskId, 10);
   const data: { name?: string; description?: string; type?: string; } = req.body;
 
@@ -150,7 +150,7 @@ taskRouter.put('/:taskId', auth, idParamCheck, async (req, res) => {
 });
 
 // Delete a task by ID (auth required)
-taskRouter.delete('/:taskId', auth, idParamCheck, async (req, res) => {
+taskRouter.delete('/:taskId', auth, async (req, res) => {
   const taskId = parseInt(req.params.taskId, 10);
 
   try {

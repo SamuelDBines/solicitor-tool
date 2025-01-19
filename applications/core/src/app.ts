@@ -31,8 +31,8 @@ app.use('/', (req, res, next) => {
 
 app.use('/api/users', userRouter);
 app.use('/api/groups', personGroupRouter);
-app.use('/api/users', taskRouter);
-app.use('/api/groups', eventRouter);
+app.use('/api/tasks', taskRouter);
+app.use('/api/events', eventRouter);
 app.use('/auth', googleAuthRouter);
 app.use('/events', googleEventRouter);
 app.use('/auth', outlookAuthRouter);

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { registerTeam } from '../services/team.service';
 import { useTeams } from '../hooks/teams.hook';
 import { getTeamId } from '../services/helper';
-import EmptyStateSvg from '../assets/empty-state.svg';
 
 
 const TeamsPage: React.FC = () => {
@@ -79,7 +78,7 @@ const TeamsPage: React.FC = () => {
         ) : (
           // Empty State
           <div className="flex flex-col items-center justify-center text-center py-16">
-            <EmptyStateSvg />
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-24 w-24 text-gray-500 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.75 9.75L4.5 4.5m0 0l5.25-5.25M4.5 4.5l5.25 5.25M19.5 19.5l-5.25-5.25m5.25 5.25l-5.25 5.25m-5.25-5.25l-5.25 5.25" /></svg>
             <h2 className="text-2xl font-bold text-gray-300 mb-4">No Teams Yet</h2>
             <p className="text-gray-400 mb-8">
               Get started by creating your first team. Add your family members and start organizing!
