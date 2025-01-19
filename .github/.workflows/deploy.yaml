@@ -1,0 +1,68 @@
+name: CI/CD for Monorepo
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  # Build, Test, and Push UI and Core Images
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Authenticate with DigitalOcean
+      - name: Authenticate with DigitalOcean
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Log in to DOCR
+        run: doctl registry login
+
+      # Step 3: Build and Push UI Image
+      - name: Build UI Docker Image
+        working-directory: applications/ui
+        run: |
+          docker build -t registry.digitalocean.com/firebrick/ui:${{ github.sha }} .
+      - name: Push UI Docker Image
+        run: |
+          docker push registry.digitalocean.com/firebrick/ui:${{ github.sha }}
+
+      # Step 4: Build, Test, and Push Core Image
+      - name: Install Node.js for Core
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Core Dependencies
+        working-directory: applications/core
+        run: npm ci
+
+      - name: Run Core Tests
+        working-directory: applications/core
+        run: npm test
+
+      - name: Build Core Docker Image
+        working-directory: applications/core
+        run: |
+          docker build -t registry.digitalocean.com/firebrick/core:${{ github.sha }} .
+      - name: Push Core Docker Image
+        run: |
+          docker push registry.digitalocean.com/firebrick/core:${{ github.sha }}
+
+      # Step 5: Deploy to Kubernetes
+      - name: Deploy to Kubernetes
+        env:
+          KUBECONFIG: ${{ secrets.KUBECONFIG }}
+        run: |
+          kubectl set image deployment/ui-deployment ui=registry.digitalocean.com/firebrick/ui:${{ github.sha }}
+          kubectl set image deployment/core-deployment core=registry.digitalocean.com/firebrick/core:${{ github.sha }}
+          kubectl rollout status deployment/ui-deployment
+          kubectl rollout status deployment/core-deployment
