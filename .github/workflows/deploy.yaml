@@ -17,6 +17,16 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      - name: Start PostgreSQL Database
+        run: |
+          docker run --name test-postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=test -p 5432:5432 -d postgres:15
+      - name: Wait for Database
+        run: |
+          until docker exec test-postgres pg_isready -U testuser -d testdb -h localhost; do
+            echo "Waiting for database...";
+            sleep 5;
+          done
+
       # Step 2: Authenticate with DigitalOcean
       - name: Authenticate with DigitalOcean
         uses: digitalocean/action-doctl@v2
@@ -29,7 +39,7 @@ jobs:
       - name: Install Node.js for Core
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Install Core Dependencies
         run: npm ci
