@@ -4,14 +4,14 @@ const AboutUs: React.FC = () => {
   return (
     <div className="bg-gradient-to-b from-gray-900 to-gray-800 min-h-screen flex flex-col items-center">
       {/* Header Section */}
-      <div className="w-full bg-purple-700 py-12 text-center">
+      {/* <div className="w-full bg-purple-700 py-12 text-center">
         <h1 className="text-4xl font-extrabold text-white">
           About Family Planner
         </h1>
         <p className="text-gray-200 text-lg mt-4">
           Revolutionizing family planning with cutting-edge technology.
         </p>
-      </div>
+      </div> */}
 
       {/* About Content */}
       <div className="w-full max-w-5xl p-8 md:p-12 text-gray-300">

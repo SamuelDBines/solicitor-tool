@@ -14,6 +14,7 @@ import OutlookConnect from './components/connectOutlook';
 import Contact from './pages/contact.page';
 import AboutUs from './pages/about.page';
 import PricingPage from './pages/pricing.page';
+import Layout from './pages/layout';
 
 const ProtectedRoute = ({ element, isAuthenticated }) => {
   return isAuthenticated ? element : <Navigate to="/login" />;
@@ -31,9 +32,11 @@ const App = () => {
     <Router>
       <NavbarTwo isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<AboutUs />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/" element={<>
+          <Home />
+          <AboutUs />
+          <Contact />
+        </>} />
         <Route path="/pricing" element={<PricingPage />} />
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/tasks" element={<TasksPage />} />

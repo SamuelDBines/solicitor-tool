@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="768" viewBox="0 0 1024 768" style="font-family: Arial, sans-serif;">
+  <rect width="1024" height="768" fill="#1c1c28" />
+  <rect x="0" y="0" width="1024" height="80" fill="#2c2c38" />
+  <text x="20" y="50" fill="#ffffff" font-size="24" font-weight="bold">Family Planner</text>
+  <rect x="880" y="20" width="120" height="40" rx="5" fill="#e63946" />
+  <text x="910" y="48" fill="#ffffff" font-size="16" font-weight="bold">Logout</text>
+  <rect x="20" y="100" width="120" height="40" rx="5" fill="#4b4b5e" />
+  <text x="40" y="128" fill="#ffffff" font-size="16">Calendar</text>
+  <rect x="160" y="100" width="120" height="40" rx="5" fill="#4b4b5e" />
+  <text x="190" y="128" fill="#ffffff" font-size="16">Tasks</text>
+  <rect x="20" y="160" width="984" height="400" fill="#2c2c38" rx="10" />
+  <text x="40" y="200" fill="#ffffff" font-size="20" font-weight="bold">January 2025</text>
+  <rect x="900" y="180" width="90" height="30" rx="5" fill="#4b4b5e" />
+  <text x="920" y="202" fill="#ffffff" font-size="14">Month View</text>
+  <g fill="#4b4b5e">
+    <!-- Days -->
+    <text x="60" y="240" fill="#ffffff" font-size="16">Sun</text>
+    <text x="200" y="240" fill="#ffffff" font-size="16">Mon</text>
+    <text x="340" y="240" fill="#ffffff" font-size="16">Tue</text>
+    <text x="480" y="240" fill="#ffffff" font-size="16">Wed</text>
+    <text x="620" y="240" fill="#ffffff" font-size="16">Thu</text>
+    <text x="760" y="240" fill="#ffffff" font-size="16">Fri</text>
+    <text x="900" y="240" fill="#ffffff" font-size="16">Sat</text>
+    <!-- Grid -->
+    <rect x="40" y="260" width="120" height="100" fill="#33334a" rx="5" />
+    <rect x="180" y="260" width="120" height="100" fill="#33334a" rx="5" />
+    <rect x="320" y="260" width="120" height="100" fill="#33334a" rx="5" />
+    <rect x="460" y="260" width="120" height="100" fill="#33334a" rx="5" />
+    <rect x="600" y="260" width="120" height="100" fill="#33334a" rx="5" />
+    <rect x="740" y="260" width="120" height="100" fill="#33334a" rx="5" />
+    <rect x="880" y="260" width="120" height="100" fill="#33334a" rx="5" />
+    <!-- Highlighted Date -->
+    <rect x="40" y="380" width="120" height="100" fill="#6a36d4" rx="5" />
+    <text x="70" y="450" fill="#ffffff" font-size="18">19</text>
+  </g>
+  
+  <!-- Events -->
+  <rect x="460" y="300" width="180" height="40" fill="#a060e0" rx="5" />
+  <text x="500" y="328" fill="#ffffff" font-size="14">Test Event</text>
+  
+  <!-- Tasks Section -->
+  <rect x="20" y="580" width="984" height="160" fill="#2c2c38" rx="10" />
+  <text x="40" y="620" fill="#ffffff" font-size="20" font-weight="bold">Tasks</text>
+  <!-- Task Rows -->
+  <rect x="40" y="660" width="900" height="30" fill="#33334a" rx="5" />
+  <text x="60" y="680" fill="#ffffff" font-size="16">Test Task</text>
+  <rect x="40" y="700" width="900" height="30" fill="#33334a" rx="5" />
+  <text x="60" y="720" fill="#ffffff" font-size="16">New Task</text>
+</svg>

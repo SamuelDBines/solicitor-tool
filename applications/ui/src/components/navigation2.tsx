@@ -84,6 +84,24 @@ const Navbar: React.FC<{ isLoggedIn: boolean; setLoggedIn: Dispatch<SetStateActi
             ) : (
               <>
                 <Link
+                  to="/contact"
+                  className="text-gray-300 hover:text-white transition"
+                >
+                  Contact us
+                </Link>
+                <Link
+                  to="/about"
+                  className="text-gray-300 hover:text-white transition"
+                >
+                  About us
+                </Link>
+                <Link
+                  to="/pricing"
+                  className="text-gray-300 hover:text-white transition"
+                >
+                  pricing
+                </Link>
+                <Link
                   to="/login"
                   className="text-gray-300 hover:text-white transition"
                 >

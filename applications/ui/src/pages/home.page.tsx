@@ -1,5 +1,7 @@
 import React from 'react';
-
+import Button from '../components/button';
+import FamilyAppImage from '../assets/family-calendar-app.webp';
+// import FamilyAppSvg from '../assets/family-app.svg';
 const Home = () => {
   return (
     <div className="bg-gray-900 text-white min-h-screen flex flex-col">
@@ -12,14 +14,10 @@ const Home = () => {
           <p className="text-gray-300 text-lg mb-6">
             Plan events, manage schedules, and track important dates effortlessly with our intuitive family calendar.
           </p>
-          <a
-            href="/register"
-            className="bg-gradient-to-r from-purple-500 to-purple-700 text-white px-8 py-4 rounded-md text-lg font-semibold shadow-lg hover:from-purple-600 hover:to-purple-800 transition duration-200"
-          >
-            Get Started
-          </a>
+          <Button to="/register" title='Get started' type="link" />
         </div>
       </section>
+      <img src={FamilyAppImage} alt="eh" />
 
       {/* Features Section */}
       <section className="container mx-auto px-4 py-16">

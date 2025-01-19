@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react';
+import Button from '../components/button';
 import { loginUser } from '../services/user.service';
 import { useNavigate } from 'react-router-dom';
 
@@ -79,13 +80,12 @@ const LoginPage: React.FC<{ setLoggedIn: Dispatch<SetStateAction<string | null>>
 
           {/* Submit Button */}
           <div className="mb-4">
-            <button
+            <Button
+              title='Login'
               onClick={handleLogin}
               type="submit"
               className="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 rounded-lg transition duration-200"
-            >
-              Login
-            </button>
+            />
           </div>
 
           {/* Forgot Password */}
