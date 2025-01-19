@@ -55,19 +55,18 @@ jobs:
       # Step 3: Build and Push UI Image
       - name: Build UI Docker Image
         run: |
-          docker build -f Dockerfile.ui  -t registry.digitalocean.com/firebrick/ui:latest .
-      # - name: Push UI Docker Image
-      #   run: |
-      #     docker push registry.digitalocean.com/firebrick/ui:${{ github.sha }}
+           docker tag registry.digitalocean.com/firebrick/ui:${{ github.sha }} registry.digitalocean.com/firebrick/ui:latest
+
       - name: Push UI Docker Image with Latest Tag
         run: |
+          docker push registry.digitalocean.com/firebrick/ui:${{ github.sha }}
           docker push registry.digitalocean.com/firebrick/ui:latest
 
       - name: Deploy to Kubernetes
         run: |
           kubectl set image deployment/ui-deployment ui=registry.digitalocean.com/firebrick/ui:latest
-          kubectl rollout restart deployment/ui-deployment
           kubectl rollout status deployment/ui-deployment
+          
 
       # Step 4: Build, Test, and Push Core Image
       - name: Set Database URL
@@ -81,14 +80,14 @@ jobs:
 
       - name: Build Core Docker Image
         run: |
-          docker build -t registry.digitalocean.com/firebrick/core:latest .
-      - name: Push Core Docker Image
+           docker tag registry.digitalocean.com/firebrick/core:${{ github.sha }} registry.digitalocean.com/firebrick/core:latest
+           
+      - name: Push Core Docker Image with Latest Tag
         run: |
+          docker push registry.digitalocean.com/firebrick/core:${{ github.sha }}
           docker push registry.digitalocean.com/firebrick/core:latest
 
-      # Step 5: Deploy to Kubernetes
       - name: Deploy to Kubernetes
         run: |
-          kubectl set image deployment/core-deployment core=registry.digitalocean.com/firebrick/core:latest
-          kubectl rollout restart deployment/core-deployment
+          kubectl set image deployment/core-deployment ui=registry.digitalocean.com/firebrick/core:latest
           kubectl rollout status deployment/core-deployment
