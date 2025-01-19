@@ -53,6 +53,8 @@ jobs:
           docker push registry.digitalocean.com/firebrick/ui:${{ github.sha }}
 
       # Step 4: Build, Test, and Push Core Image
+      - name: Generate prisma
+        run: npm run prisma:generate
 
       - name: Run Core Tests
         run: npm test
