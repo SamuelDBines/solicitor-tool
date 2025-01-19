@@ -14,7 +14,7 @@ const localizer = momentLocalizer(moment);
 
 
 const MyCalendar: React.FC = () => {
-  const { formattedEvents, refetch } = useEvents();
+  const { refetch } = useEvents();
   const { tasks } = useTasks();
   const [isModalOpen, setIsModalOpen] = useState(false);
   // Event click handler
@@ -22,7 +22,13 @@ const MyCalendar: React.FC = () => {
     alert(`Event: ${event.title}`);
   };
 
-  const [data, setData] = useState<Omit<Event, 'id'> | null>(null);
+  const [data, setData] = useState<Omit<Event, 'id'>>({
+    startTime: new Date(),
+    endTime: new Date(),
+    name: '',
+    description: '',
+    taskId: 0
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setData({
@@ -77,7 +83,7 @@ const MyCalendar: React.FC = () => {
 
             <select
               name="taskId"
-              onChange={handleChange}
+              // onChange={handleChange}
               className="w-full px-4 py-3 bg-gray-900 text-gray-300 border border-gray-700 rounded-lg focus:ring-purple-500 focus:border-purple-500"
             >
               <option disabled selected>
@@ -109,7 +115,7 @@ const MyCalendar: React.FC = () => {
       )}
       <Calendar
         localizer={localizer}
-        events={formattedEvents}
+        events={[]}
         startAccessor="start"
         endAccessor="end"
         style={{ height: '600px' }}

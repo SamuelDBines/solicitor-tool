@@ -28,7 +28,7 @@ const Register = () => {
       await registerUser(data);
       navigate('/login');
     } catch (err) {
-      alert('Error registering user. Please try again.');
+      alert(err);
     }
   };
 

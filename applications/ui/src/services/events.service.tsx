@@ -5,8 +5,8 @@ export interface Event {
   id: number;
   name: string;
   description: string;
-  startTime: string;
-  endTime: string;
+  startTime: Date;
+  endTime: Date;
   taskId: number;
 }
 

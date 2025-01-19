@@ -1,5 +1,3 @@
-import React from 'react';
-
 const ConnectOutlook = () => {
   const handleConnect = async () => {
     const response = await fetch('http://localhost:5000/auth/outlook');

@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import NavbarTwo from './components/navigation2';
 import Login from './pages/login.page';
@@ -14,11 +14,10 @@ import OutlookConnect from './components/connectOutlook';
 import Contact from './pages/contact.page';
 import AboutUs from './pages/about.page';
 import PricingPage from './pages/pricing.page';
-import Layout from './pages/layout';
 
-const ProtectedRoute = ({ element, isAuthenticated }) => {
-  return isAuthenticated ? element : <Navigate to="/login" />;
-};
+// const ProtectedRoute = ({ element, isAuthenticated }) => {
+//   return isAuthenticated ? element : <Navigate to="/login" />;
+// };
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem('token')); // Change this to `true` to test authenticated routes

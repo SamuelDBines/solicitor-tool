@@ -1,5 +1,3 @@
-import React from 'react';
-
 const ConnectGoogle = () => {
   const handleConnect = async () => {
     const response = await fetch('http://localhost:5000/auth/google');

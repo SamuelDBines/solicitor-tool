@@ -9,7 +9,7 @@ export const getTeamId = () => {
   return null;
 };
 
-export const post = (api: string, body, headers) => {
+export const post = (api: string, body: object, headers: object) => {
   return axios.post(`${apiUrl}${api}`, body, {
     headers: {
       ...headers,
@@ -18,7 +18,7 @@ export const post = (api: string, body, headers) => {
   });
 };
 
-export const put = (api: string, body, headers) => {
+export const put = (api: string, body: object, headers: object) => {
   return axios.put(`${apiUrl}${api}`, body, {
     headers: {
       ...headers,
@@ -27,7 +27,7 @@ export const put = (api: string, body, headers) => {
   });
 };
 
-export const del = (api: string, headers) => {
+export const del = (api: string, headers: object) => {
   return axios.delete(`${apiUrl}${api}`, {
     headers: {
       ...headers,
@@ -36,7 +36,7 @@ export const del = (api: string, headers) => {
   });
 };
 
-export const get = (api: string, headers) => {
+export const get = (api: string, headers: object) => {
   return axios.get(`${apiUrl}${api}`, {
     headers: {
       ...headers,

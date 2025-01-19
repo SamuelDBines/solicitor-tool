@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "npm run build && concurrently npm:dev:*",
-    "test": "npm run build && npm run test -w applications/core",
+    "test": "npm run build && npm run test -w applications/core && npm run build:ui",
     "build": "npm run -w packages build && npm run build -w applications/core",
     "dev:domain": "npm run -w applications/domain dev",
     "dev:core": "npm run -w applications/core dev",

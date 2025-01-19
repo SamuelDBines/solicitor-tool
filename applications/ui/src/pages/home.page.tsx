@@ -1,4 +1,3 @@
-import React from 'react';
 import Button from '../components/button';
 import FamilyAppImage from '../assets/family-calendar-app.webp';
 // import FamilyAppSvg from '../assets/family-app.svg';

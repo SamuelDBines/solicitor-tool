@@ -5,12 +5,12 @@ interface ButtonProps {
   title: string;
   type?: 'link' | 'submit' | 'button';
   to?: string;
-  onClick?: (e: any) => void;
+  onClick?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   variant?: 'primary' | 'secondary' | 'warn';
   fullWidth?: boolean;
 }
 
-const Button: React.FC<ButtonProps> = ({ title, type = 'button', to, onClick, variant = 'primary' }) => {
+const Button: React.FC<ButtonProps> = ({ title, type = 'button', to, variant = 'primary' }) => {
   const navigate = useNavigate();
 
   const styles = React.useMemo(() => {
@@ -34,7 +34,7 @@ const Button: React.FC<ButtonProps> = ({ title, type = 'button', to, onClick, va
       {title}
     </a>;
   }
-  return <button onClick={onClick} className={styles}>{title}</button>;
+  return <button className={styles}>{title}</button>;
 };
 
 export default Button;

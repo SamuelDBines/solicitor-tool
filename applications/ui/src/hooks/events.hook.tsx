@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from 'react';
-import { moment } from 'moment';
 import { Event, getEvents } from '../services/events.service';
 
 export interface ReactCalendarEvent extends Event {
@@ -20,7 +19,7 @@ export const useEvents = () => {
     }
   }, [r]);
 
-  const formattedEvents: ReactCalendarEvent[] = useMemo(() => events.map(t => ({
+  const formattedEvents = useMemo(() => events.map(t => ({
     title: t.name,
     start: new Date(t.startTime),
     end: new Date(t.endTime),
