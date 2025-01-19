@@ -70,6 +70,11 @@ jobs:
         run: |
           docker push registry.digitalocean.com/firebrick/ui:${{ github.sha }}
           docker push registry.digitalocean.com/firebrick/ui:latest
+      
+      - name: Cleanup Old UI Images
+        if: contains(github.event.head_commit.message, 'release(ui)') || contains(github.event.head_commit.message, 'release')
+        run: |
+          doctl registry repository list-tags firebrick/ui --format Tag --no-header | tail -n +6 | xargs -I {} doctl registry repository delete-tag firebrick/ui:{} --force
 
       - name: Deploy to Kubernetes
         if: contains(github.event.head_commit.message, 'release(ui)') || contains(github.event.head_commit.message, 'release')
@@ -104,6 +109,11 @@ jobs:
         run: |
           docker push registry.digitalocean.com/firebrick/core:${{ github.sha }}
           docker push registry.digitalocean.com/firebrick/core:latest
+
+      - name: Cleanup Old Core Images
+        if: contains(github.event.head_commit.message, 'release(core)') || contains(github.event.head_commit.message, 'release')
+        run: |
+          doctl registry repository list-tags firebrick/core --format Tag --no-header | tail -n +6 | xargs -I {} doctl registry repository delete-tag firebrick/core:{} --force
 
       - name: Deploy to Kubernetes
         if: contains(github.event.head_commit.message, 'release(core)') || contains(github.event.head_commit.message, 'release')
