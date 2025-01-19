@@ -7,6 +7,7 @@
     "dev": "npm run build && concurrently npm:dev:*",
     "test": "npm run build && npm run test -w applications/core && npm run build:ui",
     "build": "npm run -w packages build && npm run build -w applications/core",
+    "build:core": "npm run build -w applications/core",
     "build:ui": "npm run -w applications/ui build",
     "dev:ui": "npm run -w applications/ui dev",
     "dev:core": "npm run -w applications/core dev",

@@ -71,8 +71,11 @@ spec:
                   name: core-env-secrets
                   key: MS_CLIENT_SECRET
           resources:
-            limits:
+            requests:
               memory: "512Mi"
+              cpu: "500m"
+            limits:
+              memory: "1Gi"
               cpu: "1"
 
 ---

@@ -11,6 +11,6 @@ RUN npm ci
 COPY . .
 
 # Build and expose the app
-RUN npm run build
+RUN npm run build:core
 EXPOSE 5000
 CMD ["npm", "run", "prod:core"]
