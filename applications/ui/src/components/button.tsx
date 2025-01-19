@@ -5,7 +5,7 @@ interface ButtonProps {
   title: string;
   type?: 'link' | 'submit' | 'button';
   to?: string;
-  onClick?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onClick?: (e: React.FormEvent<HTMLButtonElement>) => void;
   variant?: 'primary' | 'secondary' | 'warn';
   fullWidth?: boolean;
 }

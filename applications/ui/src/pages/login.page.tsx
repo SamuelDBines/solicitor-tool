@@ -1,10 +1,10 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import Button from '../components/button';
-// import { loginUser } from '../services/user.service';
-// import { useNavigate } from 'react-router-dom';
+import { loginUser } from '../services/user.service';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage: React.FC<{ setLoggedIn: Dispatch<SetStateAction<string | null>>; }> = ({ setLoggedIn }) => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [data, setData] = React.useState({
     email: '',
     password: ''
@@ -18,17 +18,17 @@ const LoginPage: React.FC<{ setLoggedIn: Dispatch<SetStateAction<string | null>>
     });
   };
 
-  // const handleLogin = async (e: React.FormEvent<HTMLButtonElement>) => {
-  //   e.preventDefault();
-  //   try {
-  //     const response = await loginUser(data);
-  //     setLoggedIn(response.data.token);
-  //     localStorage.setItem('token', response.data.token);
-  //     navigate('/calendar');
-  //   } catch (err) {
-  //     alert('Error logging in. Please try again.', err);
-  //   }
-  // };
+  const handleLogin = async (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    try {
+      const response = await loginUser(data);
+      setLoggedIn(response.data.token);
+      localStorage.setItem('token', response.data.token);
+      navigate('/calendar');
+    } catch (err) {
+      alert(err);
+    }
+  };
 
   return (
     <div className="bg-gradient-to-b from-gray-900 to-gray-800 min-h-screen flex items-center justify-center">
@@ -83,7 +83,7 @@ const LoginPage: React.FC<{ setLoggedIn: Dispatch<SetStateAction<string | null>>
           <div className="mb-4">
             <Button
               title='Login'
-              // onClick={handleLogin}
+              onClick={handleLogin}
               type="submit"
             // className="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 rounded-lg transition duration-200"
             />

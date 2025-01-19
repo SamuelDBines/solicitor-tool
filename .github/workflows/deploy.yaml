@@ -80,7 +80,7 @@ jobs:
         if: contains(github.event.head_commit.message, 'release(ui)') || contains(github.event.head_commit.message, 'release')
         run: |
           kubectl set image deployment/ui-deployment ui=registry.digitalocean.com/firebrick/ui:latest
-          kubectl annotate deployment/core-deployment kubernetes.io/change-cause="Commit: $COMMIT_MESSAGE"
+          kubectl annotate deployment/ui-deployment kubernetes.io/change-cause="Commit: $COMMIT_MESSAGE"
           kubectl rollout status deployment/ui-deployment
           
 
@@ -118,6 +118,6 @@ jobs:
       - name: Deploy to Kubernetes
         if: contains(github.event.head_commit.message, 'release(core)') || contains(github.event.head_commit.message, 'release')
         run: |
-          kubectl set image deployment/core-deployment ui=registry.digitalocean.com/firebrick/core:latest
+          kubectl set image deployment/core-deployment core=registry.digitalocean.com/firebrick/core:latest
           kubectl annotate deployment/core-deployment kubernetes.io/change-cause="Commit: $COMMIT_MESSAGE"
           kubectl rollout status deployment/core-deployment
