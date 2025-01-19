@@ -1,0 +1,8 @@
+[
+  { id: 1, name: 'Family Group A', description: 'Manage tasks for Group A'
+  },
+  { id: 2, name: 'Family Group B', description: 'Tasks and events for Group B'
+  },
+  { id: 3, name: 'Family Group C', description: 'Shared calendar for Group C'
+  },
+]

@@ -43,8 +43,9 @@ const MyCalendar: React.FC = () => {
   };
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-md">
-      <h1 className="text-2xl font-bold text-gray-800 text-center mb-4">
+    <div className="p-6 bg-gradient-to-b from-gray-900 to-gray-800 text-white rounded-lg shadow-lg">
+      {/* Calendar Title */}
+      <h1 className="text-3xl font-extrabold text-center mb-6">
         Family Planner Calendar
       </h1>
       <Calendar

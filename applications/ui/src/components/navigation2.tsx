@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const Navbar: React.FC<{ isLoggedIn: boolean; }> = ({ isLoggedIn }) => {
+const Navbar: React.FC<{ isLoggedIn: boolean; setLoggedIn: Dispatch<SetStateAction<string | null>>; }> = ({ isLoggedIn, setLoggedIn }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const toggleDrawer = () => setIsDrawerOpen((prev) => !prev);
@@ -9,10 +9,13 @@ const Navbar: React.FC<{ isLoggedIn: boolean; }> = ({ isLoggedIn }) => {
   return (
     <>
       {/* Top Navbar */}
-      <nav className="bg-purple-500 text-white shadow-md">
+      <nav className="bg-transparent backdrop-blur-lg w-full z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           {/* Logo */}
-          <Link to="/" className="text-2xl font-bold">
+          <Link
+            to="/"
+            className="text-2xl font-bold text-white hover:text-purple-400 transition duration-200"
+          >
             Family Planner
           </Link>
 
@@ -39,41 +42,41 @@ const Navbar: React.FC<{ isLoggedIn: boolean; }> = ({ isLoggedIn }) => {
 
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center space-x-6">
-            <Link
-              to="/"
-              className="hover:text-gray-200 transition duration-200"
-            >
+            <Link to="/" className="text-gray-300 hover:text-white transition">
               Home
             </Link>
             {isLoggedIn ? (
               <>
                 <Link
                   to="/teams"
-                  className="hover:text-gray-200 transition duration-200"
+                  className="text-gray-300 hover:text-white transition"
                 >
                   Teams
                 </Link>
                 <Link
                   to="/tasks"
-                  className="hover:text-gray-200 transition duration-200"
+                  className="text-gray-300 hover:text-white transition"
                 >
                   Tasks
                 </Link>
                 <Link
                   to="/calendar"
-                  className="hover:text-gray-200 transition duration-200"
+                  className="text-gray-300 hover:text-white transition"
                 >
                   Calendar
                 </Link>
                 <Link
                   to="/profile"
-                  className="hover:text-gray-200 transition duration-200"
+                  className="text-gray-300 hover:text-white transition"
                 >
                   Profile
                 </Link>
                 <button
-                  className="bg-red-500 px-4 py-2 rounded-md hover:bg-red-600 transition duration-200"
-                  onClick={() => alert('Logging out...')}
+                  className="bg-red-500 px-4 py-2 rounded-md hover:bg-red-600 transition"
+                  onClick={() => {
+                    localStorage.removeItem('token');
+                    setLoggedIn(null);
+                  }}
                 >
                   Logout
                 </button>
@@ -82,13 +85,13 @@ const Navbar: React.FC<{ isLoggedIn: boolean; }> = ({ isLoggedIn }) => {
               <>
                 <Link
                   to="/login"
-                  className="hover:text-gray-200 transition duration-200"
+                  className="text-gray-300 hover:text-white transition"
                 >
                   Login
                 </Link>
                 <Link
                   to="/register"
-                  className="hover:text-gray-200 transition duration-200"
+                  className="text-gray-300 hover:text-white transition"
                 >
                   Sign Up
                 </Link>
@@ -101,11 +104,11 @@ const Navbar: React.FC<{ isLoggedIn: boolean; }> = ({ isLoggedIn }) => {
       {/* Side Drawer for Mobile */}
       {isDrawerOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50">
-          <div className="fixed top-0 left-0 w-64 h-full bg-white shadow-lg z-50">
-            <div className="p-4 border-b">
-              <h2 className="text-lg font-bold text-purple-500">Navigation</h2>
+          <div className="fixed top-0 left-0 w-64 h-full bg-gray-800 shadow-lg z-50">
+            <div className="p-4 border-b border-gray-700">
+              <h2 className="text-lg font-bold text-purple-400">Navigation</h2>
               <button
-                className="absolute top-4 right-4 text-gray-600"
+                className="absolute top-4 right-4 text-gray-300"
                 onClick={toggleDrawer}
               >
                 <svg
@@ -128,7 +131,7 @@ const Navbar: React.FC<{ isLoggedIn: boolean; }> = ({ isLoggedIn }) => {
               <li>
                 <Link
                   to="/"
-                  className="block text-gray-800 hover:text-purple-500"
+                  className="block text-gray-300 hover:text-purple-400 transition"
                   onClick={toggleDrawer}
                 >
                   Home
@@ -139,7 +142,7 @@ const Navbar: React.FC<{ isLoggedIn: boolean; }> = ({ isLoggedIn }) => {
                   <li>
                     <Link
                       to="/teams"
-                      className="block text-gray-800 hover:text-purple-500"
+                      className="block text-gray-300 hover:text-purple-400 transition"
                       onClick={toggleDrawer}
                     >
                       Teams
@@ -148,7 +151,7 @@ const Navbar: React.FC<{ isLoggedIn: boolean; }> = ({ isLoggedIn }) => {
                   <li>
                     <Link
                       to="/tasks"
-                      className="block text-gray-800 hover:text-purple-500"
+                      className="block text-gray-300 hover:text-purple-400 transition"
                       onClick={toggleDrawer}
                     >
                       Tasks
@@ -157,7 +160,7 @@ const Navbar: React.FC<{ isLoggedIn: boolean; }> = ({ isLoggedIn }) => {
                   <li>
                     <Link
                       to="/calendar"
-                      className="block text-gray-800 hover:text-purple-500"
+                      className="block text-gray-300 hover:text-purple-400 transition"
                       onClick={toggleDrawer}
                     >
                       Calendar
@@ -166,7 +169,7 @@ const Navbar: React.FC<{ isLoggedIn: boolean; }> = ({ isLoggedIn }) => {
                   <li>
                     <Link
                       to="/profile"
-                      className="block text-gray-800 hover:text-purple-500"
+                      className="block text-gray-300 hover:text-purple-400 transition"
                       onClick={toggleDrawer}
                     >
                       Profile
@@ -189,7 +192,7 @@ const Navbar: React.FC<{ isLoggedIn: boolean; }> = ({ isLoggedIn }) => {
                   <li>
                     <Link
                       to="/login"
-                      className="block text-gray-800 hover:text-purple-500"
+                      className="block text-gray-300 hover:text-purple-400 transition"
                       onClick={toggleDrawer}
                     >
                       Login
@@ -198,7 +201,7 @@ const Navbar: React.FC<{ isLoggedIn: boolean; }> = ({ isLoggedIn }) => {
                   <li>
                     <Link
                       to="/register"
-                      className="block text-gray-800 hover:text-purple-500"
+                      className="block text-gray-300 hover:text-purple-400 transition"
                       onClick={toggleDrawer}
                     >
                       Sign Up

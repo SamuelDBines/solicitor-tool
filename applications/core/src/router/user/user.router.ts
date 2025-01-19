@@ -70,6 +70,7 @@ router.post('/register', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   const data: { email: string, password: string; } = req.body;
+  console.log(data);
   const userAttempts = loginAttempts.get(data.email);
   const now = Date.now();
 
@@ -88,7 +89,6 @@ router.post('/login', async (req, res) => {
   });
 
   if (!user || !(await verifyPassword(data.password, user.password))) {
-    console.log('Email, password', user.email,);
     if (!loginAttempts.has(data.email)) {
       loginAttempts.set(data.email, { attempts: 1, blockUntil: null });
     } else {
@@ -112,6 +112,7 @@ router.post('/login', async (req, res) => {
     message: 'Login successful',
     token: signToken({
       sub: user.id,
+      id: user.id,
       email: user.email
     }),
     name: user.name

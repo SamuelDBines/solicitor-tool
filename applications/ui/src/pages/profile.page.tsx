@@ -50,19 +50,16 @@ const ProfilePage: React.FC = () => {
   };
 
   return (
-    <div className="p-6 bg-white min-h-screen">
-      <h1 className="text-2xl font-bold text-gray-800 text-center mb-6">
-        My Profile
-      </h1>
+    <div className="bg-gradient-to-b from-gray-900 to-gray-800 min-h-screen text-white p-6">
+      {/* Header */}
+      <h1 className="text-3xl font-extrabold text-center mb-8">My Profile</h1>
 
       {/* User Information */}
-      <div className="mb-6 bg-gray-100 p-6 rounded-lg shadow-md">
-        <h2 className="text-lg font-bold text-gray-700 mb-4">
-          Personal Information
-        </h2>
-        <div className="space-y-4">
+      <div className="mb-8 bg-gray-800 p-6 rounded-lg shadow-lg">
+        <h2 className="text-2xl font-semibold mb-6">Personal Information</h2>
+        <div className="space-y-6">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="name" className="block text-sm font-medium text-gray-300">
               Name
             </label>
             <input
@@ -71,11 +68,11 @@ const ProfilePage: React.FC = () => {
               name="name"
               value={userInfo.name}
               onChange={handleUserChange}
-              className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:ring-purple-500 focus:border-purple-500"
+              className="w-full px-4 py-3 bg-gray-900 text-gray-300 border border-gray-700 rounded-lg focus:ring-purple-500 focus:border-purple-500"
             />
           </div>
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="email" className="block text-sm font-medium text-gray-300">
               Email
             </label>
             <input
@@ -84,32 +81,30 @@ const ProfilePage: React.FC = () => {
               name="email"
               value={userInfo.email}
               onChange={handleUserChange}
-              className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:ring-purple-500 focus:border-purple-500"
+              className="w-full px-4 py-3 bg-gray-900 text-gray-300 border border-gray-700 rounded-lg focus:ring-purple-500 focus:border-purple-500"
             />
           </div>
         </div>
       </div>
 
       {/* Family Management */}
-      <div className="mb-6 bg-gray-100 p-6 rounded-lg shadow-md">
-        <h2 className="text-lg font-bold text-gray-700 mb-4">
-          Family Members
-        </h2>
+      <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
+        <h2 className="text-2xl font-semibold mb-6">Family Members</h2>
 
         {/* List of Family Members */}
         <ul className="space-y-4 mb-6">
           {family.map((member) => (
             <li
               key={member.id}
-              className="flex items-center justify-between p-4 border rounded-lg bg-white"
+              className="flex items-center justify-between p-4 bg-gray-900 rounded-lg shadow-md"
             >
               <div>
-                <p className="font-medium text-gray-800">{member.name}</p>
-                <p className="text-sm text-gray-500">{member.relationship}</p>
+                <p className="text-lg font-semibold text-white">{member.name}</p>
+                <p className="text-sm text-gray-400">{member.relationship}</p>
               </div>
               <button
                 onClick={() => removeFamilyMember(member.id)}
-                className="text-red-500 hover:text-red-700 transition duration-200"
+                className="text-red-500 hover:text-red-600 transition duration-200"
               >
                 Remove
               </button>
@@ -120,7 +115,7 @@ const ProfilePage: React.FC = () => {
         {/* Add New Family Member */}
         <div className="space-y-4">
           <div>
-            <label htmlFor="familyName" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="familyName" className="block text-sm font-medium text-gray-300">
               Name
             </label>
             <input
@@ -129,11 +124,11 @@ const ProfilePage: React.FC = () => {
               name="name"
               value={newFamilyMember.name}
               onChange={handleNewMemberChange}
-              className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:ring-purple-500 focus:border-purple-500"
+              className="w-full px-4 py-3 bg-gray-900 text-gray-300 border border-gray-700 rounded-lg focus:ring-purple-500 focus:border-purple-500"
             />
           </div>
           <div>
-            <label htmlFor="relationship" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="relationship" className="block text-sm font-medium text-gray-300">
               Relationship
             </label>
             <input
@@ -142,12 +137,12 @@ const ProfilePage: React.FC = () => {
               name="relationship"
               value={newFamilyMember.relationship}
               onChange={handleNewMemberChange}
-              className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:ring-purple-500 focus:border-purple-500"
+              className="w-full px-4 py-3 bg-gray-900 text-gray-300 border border-gray-700 rounded-lg focus:ring-purple-500 focus:border-purple-500"
             />
           </div>
           <button
             onClick={addFamilyMember}
-            className="w-full bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition duration-200"
+            className="w-full bg-purple-500 hover:bg-purple-600 text-white py-3 rounded-lg transition duration-200"
           >
             Add Family Member
           </button>

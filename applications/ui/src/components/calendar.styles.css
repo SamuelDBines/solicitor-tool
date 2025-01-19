@@ -1,11 +1,11 @@
 /* Main calendar container */
 .rbc-calendar {
-  @apply bg-white border rounded-lg shadow-md;
+  @apply bg-gray-800 border border-gray-700 rounded-lg shadow-md text-white;
 }
 
 /* Toolbar (navigation and views like month, week, day) */
 .rbc-toolbar {
-  @apply flex justify-between items-center p-4 border-b;
+  @apply flex justify-between items-center p-4 border-b border-gray-700;
 }
 
 .rbc-toolbar button {
@@ -13,12 +13,12 @@
 }
 
 .rbc-toolbar button:disabled {
-  @apply bg-gray-300 text-gray-600 cursor-not-allowed;
+  @apply bg-gray-500 text-gray-300 cursor-not-allowed;
 }
 
 /* Toolbar labels (e.g., month name) */
 .rbc-toolbar-label {
-  @apply text-xl font-bold text-gray-800;
+  @apply text-2xl font-bold text-white;
 }
 
 /* Event container */
@@ -28,33 +28,47 @@
 
 /* Day headers (e.g., Mon, Tue) */
 .rbc-header {
-  @apply bg-gray-100 text-gray-700 font-bold p-2 border-b;
+  @apply bg-gray-700 text-gray-300 font-bold p-2 border-b border-gray-600;
 }
 
 /* Time slots (grid lines) */
 .rbc-time-slot {
-  @apply border-t border-gray-200;
+  @apply border-t border-gray-600;
 }
 
 /* Today highlight */
 .rbc-today {
-  @apply bg-purple-50;
+  @apply bg-purple-900 text-white;
 }
 
 /* Month view cells */
 .rbc-month-row {
-  @apply border-b;
+  @apply border-b border-gray-700;
 }
 
 .rbc-day-bg {
-  @apply hover:bg-gray-50;
+  @apply hover:bg-gray-700;
 }
 
 .rbc-off-range-bg {
-  @apply bg-gray-100 text-gray-400; /* For days outside the current month */
+  @apply bg-gray-700 text-gray-400; /* For days outside the current month */
 }
 
 /* Selected event highlight */
 .rbc-selected {
   @apply bg-purple-700 text-white;
+}
+
+/* Popup styles for multi-event days */
+.rbc-overlay {
+  @apply bg-gray-800 border border-gray-700 shadow-md rounded-lg p-2;
+}
+
+.rbc-overlay-header {
+  @apply text-white font-semibold border-b border-gray-600 pb-1 mb-2;
+}
+
+/* Week and Day view slot styling */
+.rbc-timeslot-group {
+  @apply border-b border-gray-600;
 }

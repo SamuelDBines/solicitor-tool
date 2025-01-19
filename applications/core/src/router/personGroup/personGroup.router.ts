@@ -37,23 +37,24 @@ router.get('/:id', auth, idParamCheck, async (req, res) => {
 });
 
 router.post('/register', auth, async (req, res) => {
+  console.log(req.user);
   const data: {
     name: string,
     password;
   } = req.body;
 
-  if (!data.password || !data.name) {
-    res.status(400).json({ message: 'Email and password are required' });
+  if (!data.name) {
+    res.status(400).json({ message: 'Name is required' });
     return;
   }
 
-  const hashedPassword = await hashPassword(data.password);
+  const hashedPassword = data.password ? await hashPassword(data.password) : '';
   try {
     await prisma.$transaction(async (tx) => {
       const personGroup = await prismaClient.personGroup.create({
         data: {
           name: data.name,
-          password: hashedPassword,
+          // password: hashedPassword,
         },
       });
 
