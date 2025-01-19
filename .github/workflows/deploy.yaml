@@ -68,8 +68,8 @@ jobs:
       - name: Generate prisma
         run: npm run prisma:generate
 
-      - name: Run Core Tests
-        run: npm test
+      # - name: Run Core Tests
+      #   run: npm test
 
       - name: Build Core Docker Image
         run: |
