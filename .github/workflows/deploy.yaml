@@ -55,7 +55,7 @@ jobs:
       # Step 3: Build and Push UI Image
       - name: Build UI Docker Image
         run: |
-          docker build -t your-dockerhub-username/ui:${{ github.sha }} -f Dockerfile .
+          docker build -t registry.digitalocean.com/firebrick/ui:${{ github.sha }} -f Dockerfile .
 
       - name: Tag Docker Image
         run: |
@@ -84,7 +84,7 @@ jobs:
 
       - name: Build Core Docker Image
         run: |
-          docker build -t your-dockerhub-username/core:${{ github.sha }} -f Dockerfile .
+          docker build -t registry.digitalocean.com/firebrick/core:${{ github.sha }} -f Dockerfile .
 
       - name: Tag Core Docker Image
         run: |
