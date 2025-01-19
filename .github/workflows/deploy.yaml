@@ -58,17 +58,16 @@ jobs:
       - name: Build UI Docker Image
         if: contains(github.event.head_commit.message, 'release(ui)') || contains(github.event.head_commit.message, 'release(all)')
         run: |
-          docker build -t registry.digitalocean.com/firebrick/ui:${{ github.sha }} -f Dockerfile .
+          docker build -t registry.digitalocean.com/firebrick/ui:latest -f Dockerfile .
 
       - name: Tag Docker Image
         if: contains(github.event.head_commit.message, 'release(ui)') || contains(github.event.head_commit.message, 'release(all)')
         run: |
-           docker tag registry.digitalocean.com/firebrick/ui:${{ github.sha }} registry.digitalocean.com/firebrick/ui:latest
+           docker tag registry.digitalocean.com/firebrick/ui:latest
 
       - name: Push UI Docker Image with Latest Tag
         if: contains(github.event.head_commit.message, 'release(ui)') || contains(github.event.head_commit.message, 'release(all)')
         run: |
-          docker push registry.digitalocean.com/firebrick/ui:${{ github.sha }}
           docker push registry.digitalocean.com/firebrick/ui:latest
       
       - name: Cleanup Old UI Images
@@ -80,7 +79,8 @@ jobs:
         if: contains(github.event.head_commit.message, 'release(ui)') || contains(github.event.head_commit.message, 'release(all)')
         run: |
           kubectl set image deployment/ui-deployment ui=registry.digitalocean.com/firebrick/ui:latest
-          kubectl annotate deployment/ui-deployment kubernetes.io/change-cause="Commit: $COMMIT_MESSAGE"
+          kubectl annotate deployment/ui-deployment kubernetes.io/change-cause="Commit: $${{ github.event.head_commit.message }} - ${{ github.sha }}"
+          kubectl rollout restart deployment/ui-deployment
           kubectl rollout status deployment/ui-deployment
           
 
@@ -97,17 +97,16 @@ jobs:
       - name: Build Core Docker Image
         if: contains(github.event.head_commit.message, 'release(core)') || contains(github.event.head_commit.message, 'release(all)')
         run: |
-          docker build -t registry.digitalocean.com/firebrick/core:${{ github.sha }} -f Dockerfile .
+          docker build -t registry.digitalocean.com/firebrick/core:latest -f Dockerfile .
 
       - name: Tag Core Docker Image
         if: contains(github.event.head_commit.message, 'release(core)') || contains(github.event.head_commit.message, 'release(all)')
         run: |
-           docker tag registry.digitalocean.com/firebrick/core:${{ github.sha }} registry.digitalocean.com/firebrick/core:latest
+           docker tag registry.digitalocean.com/firebrick/core:latest
            
       - name: Push Core Docker Image with Latest Tag
         if: contains(github.event.head_commit.message, 'release(core)') || contains(github.event.head_commit.message, 'release(all)')
         run: |
-          docker push registry.digitalocean.com/firebrick/core:${{ github.sha }}
           docker push registry.digitalocean.com/firebrick/core:latest
 
       - name: Cleanup Old Core Images
@@ -119,5 +118,6 @@ jobs:
         if: contains(github.event.head_commit.message, 'release(core)') || contains(github.event.head_commit.message, 'release(all)')
         run: |
           kubectl set image deployment/core-deployment core=registry.digitalocean.com/firebrick/core:latest
-          kubectl annotate deployment/core-deployment kubernetes.io/change-cause="Commit: $COMMIT_MESSAGE"
+          kubectl annotate deployment/core-deployment kubernetes.io/change-cause="Commit: $${{ github.event.head_commit.message }} - ${{ github.sha }}"
+          kubectl rollout restart deployment/core-deployment
           kubectl rollout status deployment/core-deployment
