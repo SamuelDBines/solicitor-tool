@@ -13,7 +13,18 @@ spec:
       labels:
         app: core
     spec:
+      initContainers:
+        - name: run-migrations
+          image: registry.digitalocean.com/firebrick/core:latest # Use the same image as the application
+          command:
+            - sh
+            - "-c"
+            - |
+              echo "Running migrations...";
+              npm run prisma:migrate;
+              echo "Migrations completed.";
       containers:
+        
         - name: core
           image: registry.digitalocean.com/firebrick/core:latest
           ports:
