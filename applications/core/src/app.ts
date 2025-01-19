@@ -56,6 +56,15 @@ app.use((err, req, res, next) => {
   });
 });
 
+setInterval(() => {
+  const used = process.memoryUsage();
+  console.log(`Memory Usage:`);
+  console.log(`- RSS: ${(used.rss / 1024 / 1024).toFixed(2)} MB`);
+  console.log(`- Heap Total: ${(used.heapTotal / 1024 / 1024).toFixed(2)} MB`);
+  console.log(`- Heap Used: ${(used.heapUsed / 1024 / 1024).toFixed(2)} MB`);
+  console.log(`- External: ${(used.external / 1024 / 1024).toFixed(2)} MB`);
+}, 60000);
+
 process.on('uncaughtException', (err) => {
   console.error('Unhandled Exception:', err);
   process.exit(1); // Exit process after handling
